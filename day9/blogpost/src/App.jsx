@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import conf from './conf/conf';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
-import AuthService from "./appwrite/auth"
+import authService from "./appwrite/auth"
 import './App.css'
 import { login, logout } from './store/authSlice'
 
@@ -15,7 +15,7 @@ function App() {
 
   // In your App.jsx
 useEffect(() => {
-  AuthService.currentUser()
+  authService.currentUser()
     .then((userData) => {
       if (userData) {
         dispatch(login({ userData }));
@@ -35,7 +35,7 @@ useEffect(() => {
     <div className='min-h-screen m-0 flex flex-wrap content-between bg-white '>
   <div className=' w-full block'>
     <Header />
-    <main>todo{/* <Outlet /> */}</main>
+    <main><Outlet /></main>
     <Footer />
   </div>
 </div>

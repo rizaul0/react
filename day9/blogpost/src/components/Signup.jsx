@@ -4,7 +4,7 @@ import {Button,Input,Logo} from "./index"
 import { useDispatch } from 'react-redux'
 import { Service } from '../appwrite/config'
 import authService from '../appwrite/auth'
-import {useForm, UseForm} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 // import creatAccount from '../appwrite/auth'
 import { Link,useNavigate } from 'react-router-dom'
 function Signup() {
@@ -12,12 +12,12 @@ function Signup() {
     const navigation =useNavigate()
     const dispatch = useDispatch()
     const {register, handleSubmit} = useForm()
-    const {error, setError} = useState("") 
+    const [error, setError] = useState("") 
 
-    const signup = async(data)=>{
+    const create = async(data)=>{
         setError("")
         try {
-            const userData =await authService.creatAccount(data)
+            const userData =await authService.createAccount(data)
             if (userData) {
                const CurrentUser = await authService.currentUser()
                if (CurrentUser) {
@@ -27,7 +27,7 @@ function Signup() {
                 
             }
         } catch (error) {
-            throw error
+    setError(error.message)
         }
 
     } 
@@ -80,7 +80,7 @@ function Signup() {
                         {...register("password", {
                             required: true,})}
                         />
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full hover:bg-gray-700 cursor-pointer">
                             Create Account
                         </Button>
                     </div>

@@ -4,13 +4,13 @@ import {Button,Input,Logo} from "./index"
 import { useDispatch } from 'react-redux'
 import { Service } from '../appwrite/config'
 import authService from '../appwrite/auth'
-import {useForm, UseForm} from 'react-hook-form'
+import {useForm,} from 'react-hook-form'
 import { Link,useNavigate } from 'react-router-dom'
 function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {register, handleSubmit} = useForm()
-  const {error, setError} = useState("")
+  const [error, setError] = useState("")
   const login = async(data)=>{
     try {
       const session = await  authService.login(data)
@@ -68,7 +68,7 @@ function Login() {
                 />
                 <Button
                 type="submit"
-                className="w-full"
+                className="w-full hover:bg-gray-700 cursor-pointer"
                 >Sign in</Button>
             </div>
         </form>

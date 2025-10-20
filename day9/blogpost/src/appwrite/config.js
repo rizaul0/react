@@ -50,8 +50,8 @@ export class Service {
 
         try {
             return await this.databases.deleteDocument(
-                conf.VITE_APPWRITE_COLLECTION_ID,
                 conf.VITE_APPWRITE_DATABASE_ID,
+                conf.VITE_APPWRITE_COLLECTION_ID,
                 slug)
         } catch (error) {
             throw error
@@ -73,7 +73,7 @@ export class Service {
         try {
             return await this.databases.listDocuments(conf.VITE_APPWRITE_DATABASE_ID,
                 conf.VITE_APPWRITE_COLLECTION_ID,
-                Query.equal('status',['active'])
+                [Query.equal('status','active')]
             )
             
         } catch (error) {
@@ -104,7 +104,7 @@ export class Service {
 
     filePreview(fileId){
         try {
-            return this.bucket.getFilePreview(conf.VITE_APPWRITE_BUCKET_ID,fileId)
+            return this.bucket.getFileView(conf.VITE_APPWRITE_BUCKET_ID,fileId)
         } catch (error) {
             throw error
         }

@@ -14,23 +14,24 @@ export class AuthService{
     this.account =new  Account(this.client);
  }
 
- async creatAccount({email,password,name}){
+ async createAccount({email,password,name}){
    try {
     const userAccount = await this.account.create(ID.unique(),email,password,name
     )
     if (userAccount) {
-        return this.login(email,password);
+        return this.login({email,password});
         
     } else {
         return userAccount;
     }
     
    } catch (e) {
-    console.error(e);
+      console.error("Error creating account:", e);
+      throw e;
    }
  }
 
-async login(email,password){
+async login({email,password}){
     try {
         return await this.account.createEmailPasswordSession(email,password);
     } catch (error) {
@@ -54,19 +55,27 @@ async logout (){
     }
 
 }
-
 async currentUser(){
     try {
-        const result = await this.account.get()
-        if (result) {
-            return result
-        } else {
-            return result
-        }
+        return await this.account.get();
     } catch (e) {
-        throw e
+        console.warn("No active session:", e.message);
+        return null; // important fix
     }
 }
+
+// async currentUser(){
+//     try {
+//         const result = await this.account.get()
+//         if (result) {
+//             return result
+//         } else {
+//             return result
+//         }
+//     } catch (e) {
+//         throw e
+//     }
+// }
 
 }
 const authService = new AuthService();
