@@ -49,7 +49,7 @@ export class Service {
     async deletePost(slug) {
 
         try {
-            return await this.databases.deletePost(
+            return await this.databases.deleteDocument(
                 conf.VITE_APPWRITE_COLLECTION_ID,
                 conf.VITE_APPWRITE_DATABASE_ID,
                 slug)
@@ -120,14 +120,6 @@ export class Service {
     }
 
 
-
-
-
-
-
-
-
-
-
-
 }
+const service = new Service()
+export default service

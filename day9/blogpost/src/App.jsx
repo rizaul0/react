@@ -32,7 +32,7 @@ useEffect(() => {
 
 
   return !loading ? (
-    <div className='min-h-screen m-0 flex flex-wrap content-between bg-gray-400 '>
+    <div className='min-h-screen m-0 flex flex-wrap content-between bg-white '>
   <div className=' w-full block'>
     <Header />
     <main>todo{/* <Outlet /> */}</main>
